@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Loan Management System</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,13 +18,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="http://127.0.0.1:5000/">Home</a>
+                <a class="nav-link " aria-current="page" href="http://127.0.0.1:5000/">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/deposit">Deposit</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/getloan">Get Loan</a>
+                <a class="nav-link active" href="/getloan">Get Loan</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="payloan">Pay Loan</a>
@@ -38,7 +38,11 @@
       <form method="post" enctype="multipart/form-data">
         <div class="mb-3 mt-5">
           <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" name="name">
+          <select class="form-control" id="name" name="name">
+            {% for u in users %}
+                <OPTION value={{u['_id']}}>{{u['name']}}</OPTION>
+            {% endfor %}
+            </select>
         </div>
         <div class="mb-3">
           <label for="amo" class="form-label">Amount</label>
@@ -48,7 +52,7 @@
             <label for="guarantee">Guarantee</label>
             <select class="form-control" id="guarantee" name="guarantee">
             {% for u in users %}
-                <OPTION value={{u['name']}}>{{u['name']}}</OPTION>
+                <OPTION value={{u['_id']}}>{{u['name']}}</OPTION>
             {% endfor %}
             </select>
           </div>

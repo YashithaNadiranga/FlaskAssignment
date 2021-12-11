@@ -27,13 +27,20 @@ def route_getloan():
         data = db.users.find()
         for document in data:
             document['_id'] = str(document['_id'])
-            print(document['name'])
             response.append(document)
     if request.method =='POST':
         name = request.form['name']
+        guarantee = request.form['guarantee']
         amount = request.form['amount']
-        db.users.insert_one({"name": name, "amount": int(amount)})
-    return render_template('getloan.html', users=response)
+        if(name != guarantee):
+            user = db.users.find_one({"_id":ObjectId(name)})
+            guaranteeDetails = db.users.find_one({"_id":ObjectId(guarantee)})
+            aligibalAmount = user['amount'] + guaranteeDetails['amount']
+            if(aligibalAmount >= int(amount)):
+                db.loans.insert_one({"user": ObjectId(name), "guarantee": ObjectId(guarantee), "amount": int(amount), "state": "active"})
+
+        # db.users.insert_one({"name": name, "amount": int(amount)})
+    return render_template('getLoan.html', users=response)
 
 @application.route('/payloan', methods=["GET","POST"])
 def route_payloan():
