@@ -44,6 +44,14 @@
           <label for="amo" class="form-label">Amount</label>
           <input type="text" class="form-control" id="amo" name="amount">
         </div>
+        <div class="form-group mb-5">
+            <label for="guarantee">Guarantee</label>
+            <select class="form-control" id="guarantee" name="guarantee">
+            {% for u in users %}
+                <OPTION value={{u['name']}}>{{u['name']}}</OPTION>
+            {% endfor %}
+            </select>
+          </div>
 
         <button type="submit" class="btn btn-primary">Get Loan</button>
       </form>

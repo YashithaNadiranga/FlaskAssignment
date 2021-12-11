@@ -22,7 +22,18 @@ def route_deposit():
 
 @application.route('/getloan', methods=["GET","POST"])
 def route_getloan():
-    return render_template('getloan.html')
+    response = []
+    if request.method =='GET':
+        data = db.users.find()
+        for document in data:
+            document['_id'] = str(document['_id'])
+            print(document['name'])
+            response.append(document)
+    if request.method =='POST':
+        name = request.form['name']
+        amount = request.form['amount']
+        db.users.insert_one({"name": name, "amount": int(amount)})
+    return render_template('getloan.html', users=response)
 
 @application.route('/payloan', methods=["GET","POST"])
 def route_payloan():
