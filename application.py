@@ -4,7 +4,7 @@ from flask_pymongo import PyMongo
 from flask_pymongo import ObjectId
 
 application = Flask(__name__)
-application.config["MONGO_URI"] = "mongodb+srv://feanixlabs:feanixlabs@cluster0.ksxrr.mongodb.net/loan?retryWrites=true&w=majority"
+application.config["MONGO_URI"] = "-"
 mongodb_client = PyMongo(application)
 db = mongodb_client.db
 
